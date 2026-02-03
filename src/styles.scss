@@ -1,0 +1,163 @@
+/* You can add global styles to this file, and also import other style files */
+$gutter: 1rem; //for primeflex grid system
+
+/* Layout */
+@import "assets/layout/styles/layout/layout.scss";
+
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+
+
+/* Quill Text Editor for p-editor */
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+/* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+
+.form-group {
+    margin-bottom: 0.5rem !important;
+}
+
+div.card.form-builder-panel {
+    padding: 0rem !important;
+    margin-bottom: 0rem !important;
+}
+
+div.mb-2.card.border {
+    padding: 0rem !important;
+}
+
+.card {
+    box-shadow: none !important;
+}
+
+ul.p-tabmenu-nav.p-reset {
+    padding-left: 0rem !important;
+    margin-bottom: 0 !important;
+}
+
+a.p-menuitem-link.flex.justify-content-between.align-items-center.p-3.ng-star-inserted {
+    color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1)) !important
+}
+
+div.btn-group.order-12.ml-auto.ng-star-inserted {
+    margin-left: 0rem !important;
+}
+
+li>.order-12.ml-auto.ng-star-inserted {
+    width: 0% !important;
+    padding-right: 1.5rem !important;
+    padding-left: 0rem !important;
+    margin-left: 0rem !important;
+}
+
+.layout-menu {
+    .layout-root-menuitem {
+        >ul {
+            text-wrap: nowrap;
+        }
+    }
+}
+
+.dx-button.dx-button-has-icon:not(.dx-button-has-text):not(.dx-shape-standard) {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .24) !important;
+    border-color: lightgray;
+
+    &:hover {
+        box-shadow: 0 0 10px 0 #3F51B5 inset, 0 0 20px 2px #3F51B5 !important;
+        border: transparent;
+        scale: 1.2;
+      }
+}
+
+.custom-otp-input {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    appearance: none;
+    text-align: center;
+    transition: all 0.2s;
+    border-radius: 0;
+    border: 1px solid var(--surface-400);
+    background: transparent;
+    outline-offset: -2px;
+    outline-color: transparent;
+    border-right: 0 none;
+    transition: outline-color 0.3s;
+    color: var(--text-color);
+}
+
+.custom-otp-input:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.custom-otp-input:first-child,
+.custom-otp-input:nth-child(5) {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.custom-otp-input:nth-child(3),
+.custom-otp-input:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-color: var(--surface-400);
+}
+
+
+.effect-component {
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.lightSpeedOut {
+    -webkit-animation-name: lightSpeedOut;
+    animation-name: lightSpeedOut;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes lightSpeedOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        opacity: 0;
+    }
+}
+
+@keyframes lightSpeedOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        opacity: 0;
+    }
+}
+

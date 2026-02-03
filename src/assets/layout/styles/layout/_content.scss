@@ -1,0 +1,11 @@
+.layout-content-wrapper {
+    padding-top: 4rem;
+
+    .layout-content {
+        min-height: calc(100vh - 13.5rem);
+        padding: 0rem;
+        padding-left: 2rem;
+        padding-right: 2rem!important;
+        width: 100%!important;
+    }
+}

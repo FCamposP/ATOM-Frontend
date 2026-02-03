@@ -1,0 +1,57 @@
+<div class="h-screen flex flex-column bg-cover" style="background: url('assets/layout/images/pages/login-bg.jpg')">
+    <div class=" shadow-2 z-5 p-3 flex justify-content-between flex-row align-items-center"
+        style="background: #ff6600;">
+        <div class="ml-3 flex" routerLink="/">
+            <div>
+            </div>
+        </div>
+        <div class="mr-3 flex">
+
+        </div>
+    </div>
+
+    <div class="align-self-center mt-auto mb-auto">
+        <div class="text-center z-5 flex flex-column border-1 border-round-md surface-border surface-card px-3">
+            <div class="-mt-5 border-round-md mx-auto px-3 py-1 border-1 surface-border" style="background: #ff6600;">
+
+                <img src="assets/layout/images/logo-atom-chat.png" alt="Login" width="250" height="60">
+            </div>
+
+            <h4>Bienvenido</h4>
+
+            <div class="text-color-secondary mb-6 px-6">Por favor ingresa un correo electrónico para iniciar sesión
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full flex flex-column gap-3 px-3 pb-6">
+                <!-- Email -->
+                <span class="p-input-icon-left w-full">
+                    <i class="pi pi-envelope"></i>
+                    <input type="email" pInputText class="w-full" placeholder="E-mail" formControlName="email" />
+                </span>
+
+                <!-- Mensaje error -->
+                <small class="p-error text-left" *ngIf="email.invalid && email.touched">
+                    <span *ngIf="email.errors?.['required']">
+                        El correo es obligatorio
+                    </span>
+                    <span *ngIf="email.errors?.['email']">
+                        Ingresa un correo válido
+                    </span>
+                </small>
+
+                <!-- Botón -->
+                <button pButton pRipple type="submit" class="w-full mt-3" label="LOGIN"
+                    [disabled]="loginForm.invalid || loading">
+                </button>
+
+                <!-- Loading -->
+                <p-progressSpinner *ngIf="loading" styleClass="mx-auto" strokeWidth="4"></p-progressSpinner>
+
+                <!-- Error general -->
+                <small *ngIf="errorMessage" class="p-error">
+                    {{ errorMessage }}
+                </small>
+            </form>
+        </div>
+    </div>
+</div>

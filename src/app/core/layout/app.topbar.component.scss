@@ -1,0 +1,19 @@
+/* Ocultar logo pequeño por defecto (resoluciones grandes) */
+.logo-small {
+    display: none;
+  }
+
+  /* Mostrar logo grande por defecto */
+  .logo-large {
+    display: inline;
+  }
+
+  /* En resoluciones pequeñas, invertir visibilidad */
+  @media (max-width: 768px) {
+    .logo-small {
+      display: inline;
+    }
+    .logo-large {
+      display: none;
+    }
+  }

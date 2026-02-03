@@ -1,0 +1,62 @@
+<div>
+  <ul class="list-none p-0 m-0">
+
+    <li *ngFor="let task of taskList"
+        class="flex flex-column md:flex-row md:align-items-center 
+               justify-content-between gap-3 p-3 border-bottom-1 surface-border">
+
+      <!-- Checkbox + Info -->
+      <div class="flex align-items-start flex-1 gap-3">
+
+        <p-checkbox
+          [binary]="true"
+          (onChange)="onCheckboxChange($event, task)"
+          [(ngModel)]="task.completed"
+          [inputId]="task.id.toString()">
+        </p-checkbox>
+
+        <!-- Info -->
+        <div class="flex flex-column gap-1">
+
+          <!-- Name -->
+          <span class="font-semibold text-lg"
+                [ngClass]="{'line-through text-500': task.completed}">
+            {{ task.name }}
+          </span>
+
+          <!-- Date -->
+          <small class="text-600">
+            Creado: 21/01/2026 12:01:01 am 
+          </small>
+
+          <!-- Comment -->
+          <small class="text-500 italic">
+           A clean, professional and fast information access interface will be designed for an education-oriented website.
+          </small>
+
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex gap-2 justify-content-end">
+
+        <button pButton pRipple
+          type="button"
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-text p-button-info"
+          >
+        </button>
+
+        <button pButton pRipple
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-text p-button-danger"
+          >
+        </button>
+
+      </div>
+
+    </li>
+
+  </ul>
+</div>

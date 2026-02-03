@@ -1,0 +1,10 @@
+.p-accordion .p-accordion-header {
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.p-accordion .p-accordion-content {
+  border-radius: 12px;
+  padding: 0;
+}
+
