@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import Swal from 'sweetalert2';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-task-manager',
@@ -26,6 +27,8 @@ import Swal from 'sweetalert2';
     AccordionModule,
     BadgeModule,
     TaskListComponent,
+    InputTextModule,
+
   ],
   providers: [TaskService, DialogService],
 
@@ -50,6 +53,9 @@ export class TaskManagerComponent implements OnInit {
   allTasks: Task[] = [];
   todo: Task[] = [];
   completed: Task[] = [];
+
+  //campo para filtrar por titile y description
+  searchTerm: string = "";
 
   statuses: any = [
     {
@@ -104,6 +110,23 @@ export class TaskManagerComponent implements OnInit {
   ngOnDestroy() {
 
   }
+
+  get filteredTodo() {
+    return this.todo.filter(task =>
+      ((task.title ?? "") + (task.description ?? ""))
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  get filteredCompleted() {
+    return this.completed.filter(task =>
+      ((task.title ?? "") + (task.description ?? ""))
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase())
+    );
+  }
+
 
   onCompleteTask(task: Task) {
     const updatedTask = {

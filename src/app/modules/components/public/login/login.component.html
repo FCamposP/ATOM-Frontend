@@ -6,7 +6,6 @@
             </div>
         </div>
         <div class="mr-3 flex">
-
         </div>
     </div>
 
@@ -27,25 +26,28 @@
                     <i class="pi pi-envelope"></i>
                     <input type="email" pInputText class="w-full" placeholder="E-mail" formControlName="email" />
                 </span>
-
-                <small class="p-error text-left" *ngIf="email.invalid && email.touched">
-                    <span *ngIf="email.errors?.['required']">
-                        El correo es obligatorio
-                    </span>
-                    <span *ngIf="email.errors?.['email']">
-                        Ingresa un correo válido
-                    </span>
+                @if (email.invalid && email.touched) {
+                <small class="p-error text-left">
+                    @if (email.errors?.['required']) {
+                    <span>El correo es obligatorio</span>
+                    }
+                    @if (email.errors?.['email']) {
+                    <span>Ingresa un correo válido</span>
+                    }
                 </small>
-
+                }
                 <button pButton pRipple type="submit" class="w-full mt-3" label="LOGIN"
                     [disabled]="loginForm.invalid || loading">
                 </button>
+                @if (loading) {
+                <p-progressSpinner styleClass="mx-auto" strokeWidth="4"></p-progressSpinner>
+                }
 
-                <p-progressSpinner *ngIf="loading" styleClass="mx-auto" strokeWidth="4"></p-progressSpinner>
-
-                <small *ngIf="errorMessage" class="p-error">
+                @if (errorMessage) {
+                <small class="p-error">
                     {{ errorMessage }}
                 </small>
+                }
             </form>
         </div>
     </div>

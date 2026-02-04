@@ -1,35 +1,40 @@
-## Ultima PrimeNG
+# Task Manager App (Angular + PrimeNG)
+Aplicación web para la gestión de tareas personales, desarrollada con un frontend moderno en **Angular 17**, resaltando los siguientes aspectos:
+- Uso de componentes de PrimeNG.
+- Uso de componentes standalone
+- Uso de rutas protegidas y rutas libres
+- Manejo eficiente de peticiones http, considerando lo memory leaks.
+- Cargar componentes en diálogos, creados de forma dinámica.
+- Uso de Reactive Forms
+- Busqueda de tareas
 
-## Development server
+## Funcionalidades principales
+- Registro e inicio de sesión de usuarios (solamente correo electrónico válido)
+- Creación de tareas asociadas a un usuario
+- Listado de tareas agrupadas por pendientes y completadas
+- Marcar tareas como completadas
+- Edición y eliminación lógica de tareas
+- Interfaz moderna y responsive con Angular + PrimeNG
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instalación local y ejecución
+# 1. Clonar repositorio
+git clone https://github.com/FCamposP/ATOM-Frontend.git
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io/).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Run locally
-
+# 2. Instalar dependencias
 npm install
-npm start
 
-## Deploy
+# 3. Configurar entorno
+cp src/environments/environment.ts.example src/environments/environment.ts
+# Editar con tu API URL 
+# Puedes obtener un proyecto de ejemplo de apis en el repositorio: https://github.com/FCamposP/ATOM-Backend.git
 
-npm run build:prod
-firebase deploy --only hosting
+# 4. Ejecutar en desarrollo
+ng serve --o
+
+# 5. Automáticamente se abrirá una pestaña del navegador con la ruta:
+# http://localhost:4200
+
+
+## Instalación CI/CD
+# En la ruta .github/workflows/deploy-hosting.yml puedes encontrar un ejemplo para implementarlo un despliegue automático en firebase hosting
+

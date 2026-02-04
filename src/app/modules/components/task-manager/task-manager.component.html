@@ -36,61 +36,77 @@
           (click)="openFormTask()">
         </button>
         <div class="flex flex-column gap-1">
-          <div (click)="onSelectStatus(status.title)" *ngFor="let status of statuses"
+          @for (status of statuses; track status.title) {
+          <div (click)="onSelectStatus(status.title)"
             class="flex justify-content-between align-items-center border-1 border-transparent border-round-md p-3 -mx-2 cursor-pointer hover:surface-hover"
-            [ngClass]="{'bg-primary-50 border-primary-100':statusSelected === status.title }">
+            [ngClass]="{'bg-primary-50 border-primary-100': statusSelected === status.title}">
+
             <div class="flex align-items-center gap-3">
-              <div style="width:7px;height:7px;" class="border-circle" [class]="status.badgeClass"></div>
-              <span>{{status.title}}</span>
+              <div style="width:7px;height:7px;" class="border-circle" [class]="status.badgeClass">
+              </div>
+              <span>{{ status.title }}</span>
             </div>
+
             <div class="flex gap-2 align-items-center">
-              <i *ngIf="statusSelected === status.title" class="pi pi-chevron-right text-primary"></i>
+              @if (statusSelected === status.title) {
+              <i class="pi pi-chevron-right text-primary"></i>
+              }
             </div>
           </div>
+          }
         </div>
       </div>
     </div>
     <div class="col-12 md:col-9">
-      <div class="">
-        <div class="flex justify-content-between align-items-center mb-1">
+      <div class="flex flex-column gap-3">
+        <div class="p-input-icon-left w-full">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="Buscar" class="w-full" [(ngModel)]="searchTerm" />
         </div>
-        <p-accordion [multiple]="true" [activeIndex]="[0]">
-          @if(statusSelected=="Todas" || statusSelected=="Pendientes"){
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <span class="font-semibold text-lg">
-                  Tareas Pendientes
-                </span>
-                <p-badge [value]="todo.length.toString()" severity="warning">
-                </p-badge>
+        <div class="">
+          <div class="flex justify-content-between align-items-center">
+          </div>
+          <p-accordion [multiple]="true" [activeIndex]="[0]">
+            @if(statusSelected=="Todas" || statusSelected=="Pendientes"){
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-semibold text-lg">
+                    Tareas Pendientes
+                  </span>
+                  <p-badge [value]="filteredTodo.length.toString()" severity="warning">
+                  </p-badge>
 
-              </div>
-            </ng-template>
-            <app-task-list [taskList]="todo" (editTask)="openFormTask($event)" (deleteTask)="onDeleteTask($event)" (completeTask)="onCompleteTask($event)">
-            </app-task-list>
-          </p-accordionTab>
-          }
-          @if(statusSelected=="Todas" || statusSelected=="Completadas"){
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <span class="font-semibold text-lg">
-                  Tareas Completadas
-                </span>
+                </div>
+              </ng-template>
+              <app-task-list [taskList]="filteredTodo" (editTask)="openFormTask($event)" (deleteTask)="onDeleteTask($event)"
+                (completeTask)="onCompleteTask($event)">
+              </app-task-list>
+            </p-accordionTab>
+            }
+            @if(statusSelected=="Todas" || statusSelected=="Completadas"){
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-semibold text-lg">
+                    Tareas Completadas
+                  </span>
 
-                <p-badge [value]="completed.length.toString()" severity="success">
-                </p-badge>
+                  <p-badge [value]="filteredCompleted.length.toString()" severity="success">
+                  </p-badge>
 
-              </div>
-            </ng-template>
-            <app-task-list [taskList]="completed" (editTask)="openFormTask($event)" (deleteTask)="onDeleteTask($event)" (completeTask)="onCompleteTask($event)">
-            </app-task-list>
-          </p-accordionTab>
+                </div>
+              </ng-template>
+              <app-task-list [taskList]="filteredCompleted" (editTask)="openFormTask($event)"
+                (deleteTask)="onDeleteTask($event)" (completeTask)="onCompleteTask($event)">
+              </app-task-list>
+            </p-accordionTab>
 
-          }
+            }
 
-        </p-accordion>
+          </p-accordion>
+
+        </div>
 
       </div>
 
