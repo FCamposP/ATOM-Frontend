@@ -3,7 +3,6 @@ import {
     Component, DestroyRef, inject, Injectable, OnDestroy, OnInit, Renderer2, ViewChild, ViewContainerRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SpinnerService } from '@core/services/spinner.service';
 import { off } from 'devextreme/events';
 import Button from "devextreme/ui/button";
 import { MenuItem } from "primeng/api";
@@ -32,7 +31,6 @@ export class TabControlComponent implements OnInit, OnDestroy {
     activeItem: MenuItem = {};
     menuChanged: boolean = true;
     private renderer = inject(Renderer2);
-    private spinner = inject(SpinnerService);
     private tabItemOnDestroy$ = inject(DestroyRef);
 
     constructor(private tabService: TabServiceService) {
@@ -41,7 +39,7 @@ export class TabControlComponent implements OnInit, OnDestroy {
             takeUntilDestroyed(this.tabItemOnDestroy$)
         ).subscribe({
             next: ([menu, componentType]) => {
-                if (this.activateMenu({ originalEvent: undefined, item: { uniqueCode: menu.code, idRef: menu.idRef } })) { this.spinner.hide(); return; };
+                if (this.activateMenu({ originalEvent: undefined, item: { uniqueCode: menu.code, idRef: menu.idRef } })) { return; };
 
                 this.containerRef.detach();
                 const component = menu.routerLink() instanceof Promise ? this.containerRef.createComponent<any>(componentType) : this.cloneTab(componentType, menu);
@@ -74,11 +72,9 @@ export class TabControlComponent implements OnInit, OnDestroy {
                 this.activeItem = data;
 
                 this.updateVisibility();
-                this.spinner.hide();
             },
             error: (err) => {
                 console.log(err);
-                this.spinner.hide();
             }
         });
     }
@@ -174,7 +170,6 @@ export class TabControlComponent implements OnInit, OnDestroy {
     }
 
     GetComponentType(mnu: MenuSelected): Observable<any[]> {
-        this.spinner.show();
         return from((async () => [mnu, mnu.routerLink() instanceof Promise ? await mnu.routerLink().then((a: any) => a.default) : mnu.routerLink()])());
     }
 

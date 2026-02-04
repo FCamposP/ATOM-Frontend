@@ -2,14 +2,9 @@ import {
     Component,
     DestroyRef,
     inject,
-    OnDestroy,
     OnInit,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GeneralService } from '@core/services/general.service';
-import { SpinnerService } from '@core/services/spinner.service';
-import { Subject, takeUntil } from 'rxjs';
-
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html',
@@ -33,44 +28,11 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AppMenuComponent implements OnInit {
     private service = inject(GeneralService);
-    private spinnerService = inject(SpinnerService);
-
     private OnDestroy$ = inject(DestroyRef);
 
     model: any[] = [];
     showMenu: boolean = false;
 
     ngOnInit() {
-        this.spinnerService.show();
-        // this.model.push({},{});
-
-        // this.service
-        //     .GetWithoutResponse('Access', 'Entities')
-        //     .pipe(takeUntilDestroyed(this.OnDestroy$))
-        //     .subscribe({
-        //         next: (data) => {
-        //             setTimeout(() => {
-        //                 this.model.forEach((item) => {
-        //                     if (data && data.Financial) {
-        //                         if (data && data.Financial) {
-        //                             if (
-        //                                 data.Financial &&
-        //                                 data.Financial[item.code] &&
-        //                                 data.Financial[item.code].length > 0
-        //                             ) {
-        //                                 item.show = true;
-        //                             }
-        //                         }
-        //                         // item.show = true;
-        //                         this.showMenu = true;
-        //                     }
-        //                 });
-        //             });
-        //         },
-        //         error: (error) => {},
-        //         complete: () => {
-        //             this.spinnerService.hide();
-        //         },
-        //     });
     }
 }

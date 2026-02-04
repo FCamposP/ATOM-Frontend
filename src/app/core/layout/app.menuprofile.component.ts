@@ -33,19 +33,11 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class AppMenuProfileComponent implements OnInit {
 
-        private authService = inject(AuthService);
-
 
     constructor(public layoutService: LayoutService, public el: ElementRef) {}
     userName='';
 
     ngOnInit(): void {
-        // var userUserAssignment = JSON.parse(
-        //     sessionStorage.getItem('UserAssignment') ?? ''
-        // );
-        // if(userUserAssignment){
-        //     this.userName=userUserAssignment.Name;
-        // }
     }
 
     toggleMenu() {
@@ -71,6 +63,5 @@ export class AppMenuProfileComponent implements OnInit {
     }
 
     exitApp(){
-        this.authService.logoutService();
     }
 }

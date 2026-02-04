@@ -1,0 +1,77 @@
+    <div class="p-4">
+<form
+  [formGroup]="taskForm"
+  (ngSubmit)="onSubmit()"
+  class="grid p-fluid formgrid"
+>
+  <!-- Title -->
+  <div class="col-12 field">
+    <label for="title" class="text-900 font-semibold">
+      Nombre de tarea
+    </label>
+
+    <input
+      id="title"
+      type="text"
+      pInputText
+      formControlName="title"
+      placeholder="Título de la tarea"
+    />
+
+    <!-- Error -->
+    <small
+      class="p-error"
+      *ngIf="title.invalid && title.touched"
+    >
+      El título es obligatorio (mínimo 3 caracteres)
+    </small>
+  </div>
+
+  <!-- Description -->
+  <div class="col-12 field">
+    <label for="description" class="text-900 font-semibold">
+      Descripción
+    </label>
+
+    <textarea
+      id="description"
+      pInputTextarea
+      formControlName="description"
+      rows="4"
+      class="w-full"
+      placeholder="Descripción de la tarea"
+    ></textarea>
+
+    <small
+      class="p-error"
+      *ngIf="description.invalid && description.touched"
+    >
+      La descripción debe tener máximo 200 caracteres
+    </small>
+  </div>
+
+  <!-- Buttons -->
+  <div class="col-12 flex justify-content-end mt-4 gap-3">
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-outlined w-10rem"
+      icon="pi pi-times"
+      label="Cancelar"
+      (click)="cancelTask()"
+    ></button>
+
+    <button
+      pButton
+      pRipple
+      type="submit"
+      class="p-button-primary w-10rem"
+      icon="pi pi-check"
+      label="Guardar"
+      [disabled]="taskForm.invalid || loading"
+    ></button>
+  </div>
+</form>
+
+    </div>

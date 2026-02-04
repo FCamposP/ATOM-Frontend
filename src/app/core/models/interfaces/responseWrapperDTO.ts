@@ -1,5 +1,5 @@
-export interface IResponseWrapperDTO {
-    Result: any;
-    Success: boolean;
-    Message:string;
+export interface IResponseWrapper<T> {
+    data: T;
+    status: number;
+    message:string;
 }

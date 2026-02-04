@@ -1,7 +1,6 @@
-import { LoadingInterceptor } from './../interceptors/spinner-interceptor/loading.interceptor';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { BadgeModule } from 'primeng/badge';
@@ -26,12 +25,8 @@ import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CommonModule } from '@angular/common';
 import { TabControlComponent } from './tab-control/tab-control.component';
-import { PaymentSpinnerService, SpinnerService } from '@core/services/spinner.service';
-import { SpinnerComponent } from './spinner/spinner.component';
 import { ToastModule } from 'primeng/toast';
 import { TimesCircleIcon } from 'primeng/icons/timescircle';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
     declarations: [
@@ -49,8 +44,6 @@ import { TimesCircleIcon } from 'primeng/icons/timescircle';
         CommonModule,
         FormsModule,
         HttpClientModule,
-        // BrowserModule,
-        // BrowserAnimationsModule,
         StyleClassModule,
         InputTextModule,
         SidebarModule,
@@ -65,13 +58,10 @@ import { TimesCircleIcon } from 'primeng/icons/timescircle';
         MenuModule,
         AppConfigModule,
         TabControlComponent,
-        SpinnerComponent,
         ToastModule,
         TimesCircleIcon,
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-        SpinnerService, PaymentSpinnerService
       ],
 })
 export class AppLayoutModule { }
