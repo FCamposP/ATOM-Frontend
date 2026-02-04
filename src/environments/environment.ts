@@ -2,7 +2,7 @@ import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
     production: false,
-    apiUrl: 'https://us-central1-atom-task-manager-3bc2e.cloudfunctions.net/api/',
+    apiUrl: 'http://localhost:3000/',
     frontUrl: 'http://localhost:4200',
     loginUrl: 'http://localhost:4200/login',
 };

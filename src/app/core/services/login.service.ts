@@ -2,7 +2,6 @@ import { catchError, EMPTY, from, Observable, of, switchMap, tap, throwError } f
 import { GeneralService } from './general.service';
 import Swal from 'sweetalert2';
 import { inject, Injectable } from '@angular/core';
-import {HttpStatus} from 'src/app/core/models/enums/http-status'
 
 @Injectable({
     providedIn: 'root',
@@ -44,11 +43,11 @@ export class LoginService {
     loginOrRegister(email: string): Observable<any> {
         return this.login(email).pipe(
             switchMap((response) => {
-                if (response.status === HttpStatus.OK) {
+                if (response.status === 200) {
                     return of(response);
                 }
 
-                if (response.status === HttpStatus.NOT_FOUND) {
+                if (response.status === 404) {
                     return this.confirmRegister(email).pipe(
                         switchMap((confirmed) => {
                             if (!confirmed) {
@@ -57,7 +56,7 @@ export class LoginService {
 
                             return this.register(email).pipe(
                                 switchMap((registerResponse) => {
-                                    if (registerResponse.status !== HttpStatus.CREATED) {
+                                    if (registerResponse.status !== 201) {
                                         return throwError(
                                             () => new Error("No se pudo registrar")
                                         );
@@ -72,7 +71,7 @@ export class LoginService {
             }),
 
             tap((finalLoginResponse) => {
-                if (finalLoginResponse.status === HttpStatus.OK) {
+                if (finalLoginResponse.status === 200) {
                     localStorage.setItem("token", finalLoginResponse.data.token);
                     localStorage.setItem("user", email);
                 }

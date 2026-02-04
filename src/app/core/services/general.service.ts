@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { HttpStatus } from '@core/models/enums/http-status';
 
 @Injectable({
     providedIn: 'root',
@@ -57,7 +56,7 @@ export class GeneralService<T> {
 
     private handleError(error: HttpErrorResponse) {
         if (error.error != undefined && error.error.message != null) {
-            if (error.status === HttpStatus.UNAUTHORIZED) {
+            if (error.status === 401) {
                 this.router.navigate(['/login']);
 
                 Swal.fire({
