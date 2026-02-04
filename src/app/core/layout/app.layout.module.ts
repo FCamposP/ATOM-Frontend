@@ -8,37 +8,23 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
-import { AppConfigModule } from './config/app.config.module';
 import { AppLayoutComponent } from './app.layout.component';
-import { AppBreadcrumbComponent } from './app.breadcrumb.component';
-import { AppMenuProfileComponent } from './app.menuprofile.component';
-import { AppTopbarComponent } from './app.topbar.component';
-import { AppRightMenuComponent } from './app.rightmenu.component';
-import { AppMenuComponent } from './app.menu.component';
-import { AppMenuitemComponent } from './app.menuitem.component';
+import { AppTopbarComponent } from './components/topbar/app.topbar.component';
 import { RouterModule } from '@angular/router';
-import { AppSidebarComponent } from './app.sidebar.component';
-import { AppFooterComponent } from './app.footer.component';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CommonModule } from '@angular/common';
-import { TabControlComponent } from './tab-control/tab-control.component';
 import { ToastModule } from 'primeng/toast';
 import { TimesCircleIcon } from 'primeng/icons/timescircle';
+import { AppSidebarComponent } from './components/sidebar/app.sidebar.component';
 
 @NgModule({
     declarations: [
         AppLayoutComponent,
-        AppBreadcrumbComponent,
-        AppMenuProfileComponent,
         AppTopbarComponent,
-        AppRightMenuComponent,
-        AppMenuComponent,
-        AppSidebarComponent,
-        AppMenuitemComponent,
-        AppFooterComponent
+        AppSidebarComponent
     ],
     imports: [
         CommonModule,
@@ -56,8 +42,6 @@ import { TimesCircleIcon } from 'primeng/icons/timescircle';
         RouterModule,
         ButtonModule,
         MenuModule,
-        AppConfigModule,
-        TabControlComponent,
         ToastModule,
         TimesCircleIcon,
     ],

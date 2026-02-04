@@ -1,41 +1,9 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { AppConfig } from '../models/interfaces/app-config';
+import { LayoutState } from '../models/interfaces/layout-state';
 
-export type MenuMode =
-    | 'static'
-    | 'overlay'
-    | 'horizontal'
-    | 'slim'
-    | 'slim-plus'
-    | 'reveal'
-    | 'drawer';
-
-export type ColorScheme = 'light' | 'dark';
-
-export interface AppConfig {
-    inputStyle: string;
-    colorScheme: ColorScheme;
-    componentTheme: string;
-    ripple: boolean;
-    menuMode: MenuMode;
-    scale: number;
-    menuTheme: string;
-    topbarTheme: string;
-    menuProfilePosition: string;
-}
-
-interface LayoutState {
-    staticMenuMobileActive: boolean;
-    overlayMenuActive: boolean;
-    staticMenuDesktopInactive: boolean;
-    configSidebarVisible: boolean;
-    menuHoverActive: boolean;
-    rightMenuActive: boolean;
-    topbarMenuActive: boolean;
-    menuProfileActive: boolean;
-    sidebarActive: boolean;
-    anchored: boolean;
-}
 
 @Injectable({
     providedIn: 'root',
@@ -67,6 +35,8 @@ export class LayoutService {
     };
 
     config = signal<AppConfig>(this._config);
+
+    private document=inject(DOCUMENT);
 
     private configUpdate = new Subject<AppConfig>();
 
@@ -107,7 +77,7 @@ export class LayoutService {
     changeTheme() {
         let { colorScheme, componentTheme } = this.config();
         const themeLink = <HTMLLinkElement>(
-            document.getElementById('theme-link')
+            this.document.getElementById('theme-link')
         );
         const themeLinkHref = themeLink.getAttribute('href')!;
         const newHref = themeLinkHref
@@ -125,7 +95,7 @@ export class LayoutService {
 
     replaceThemeLink(href: string) {
         const id = 'theme-link';
-        let themeLink = <HTMLLinkElement>document.getElementById(id);
+        let themeLink = <HTMLLinkElement>this.document.getElementById(id);
         const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
 
         cloneLinkElement.setAttribute('href', href);
@@ -142,7 +112,7 @@ export class LayoutService {
     }
 
     changeScale(value: number) {
-        document.documentElement.style.fontSize = `${value}px`;
+        this.document.documentElement.style.fontSize = `${value}px`;
     }
 
     onMenuToggle() {

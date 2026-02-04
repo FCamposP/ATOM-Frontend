@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { TaskListComponent } from './task-list/task-list.component'
 import { FormTaskComponent } from './form-task/form-task.component'
 import { TaskService } from '../../service/task.service';
-import { Task } from 'src/app/modules/models/task';
+import { Task } from 'src/app/modules/models/interfaces/task';
 import { ButtonModule } from 'primeng/button';
 import { AccordionModule } from 'primeng/accordion';
 import { BadgeModule } from 'primeng/badge';
@@ -14,7 +14,7 @@ import { AlertService } from '@core/services/alert.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-task-manager',
@@ -118,7 +118,7 @@ export class TaskManagerComponent implements OnInit {
       .subscribe({
         next: () => {
           if (updatedTask.completed) {
-            this.alertService.showTopEnd("success", "Registro completado");
+            this.alertService.showTopEnd("success", "Tarea completado");
           }
           this.allTasks = this.allTasks.map(t =>
             t.id === updatedTask.id ? updatedTask : t

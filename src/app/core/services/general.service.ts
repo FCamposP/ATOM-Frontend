@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { HttpStatus } from '@core/models/enums/http-status';
 
 @Injectable({
     providedIn: 'root',
@@ -17,14 +18,10 @@ export class GeneralService<T> {
 
     constructor() { }
 
-    private httOptionsDefault = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.authService.getToken(),
-    });
 
-    Get(controller: string, action?: string, queryParams?: HttpParams): Observable<any> {
+    get(controller: string, action?: string, queryParams?: HttpParams): Observable<any> {
         let path = controller + "/" + (action != "" ? action + "/" : "");
-        return this.http.get(this.urlEndpoint + path, { params: queryParams, headers: this.httOptionsDefault }).pipe(
+        return this.http.get(this.urlEndpoint + path, { params: queryParams }).pipe(
             map(response => response),
             catchError(error => {
                 return this.handleError(error);
@@ -32,9 +29,9 @@ export class GeneralService<T> {
         );
     }
 
-    Post(controller: string, method: string, body: any, queryParams?: HttpParams): Observable<any> {
+    post(controller: string, method: string, body: any, queryParams?: HttpParams): Observable<any> {
         let path = controller + "/" + (method != "" ? method + "/" : "");
-        return this.http.post(this.urlEndpoint + path, body, { params: queryParams, headers: this.httOptionsDefault }).pipe(
+        return this.http.post(this.urlEndpoint + path, body, { params: queryParams }).pipe(
             map(response => response),
             catchError(error => {
                 return this.handleError(error);
@@ -42,17 +39,17 @@ export class GeneralService<T> {
         )
     }
 
-    Put(controller: string, method: string, body: any, queryParams?: HttpParams): Observable<any> {
+    put(controller: string, method: string, body: any, queryParams?: HttpParams): Observable<any> {
         let path = controller + "/" + (method != "" ? method + "/" : "");
-        return this.http.put(this.urlEndpoint + path, body, { params: queryParams, headers: this.httOptionsDefault }).pipe(
+        return this.http.put(this.urlEndpoint + path, body, { params: queryParams}).pipe(
             map(response => response),
             catchError(this.handleError)
         )
     }
 
-    Delete(controller: string, method: string, queryParams?: HttpParams, body?: any): Observable<any> {
+    delete(controller: string, method: string, queryParams?: HttpParams, body?: any): Observable<any> {
         let path = controller + "/" + (method != "" ? method + "/" : "");
-        return this.http.delete(this.urlEndpoint + path, { body: body, params: queryParams, headers: this.httOptionsDefault }).pipe(
+        return this.http.delete(this.urlEndpoint + path, { body: body, params: queryParams}).pipe(
             map(response => response),
             catchError(this.handleError)
         )
@@ -60,7 +57,7 @@ export class GeneralService<T> {
 
     private handleError(error: HttpErrorResponse) {
         if (error.error != undefined && error.error.message != null) {
-            if (error.status === 401) {
+            if (error.status === HttpStatus.UNAUTHORIZED) {
                 this.router.navigate(['/login']);
 
                 Swal.fire({

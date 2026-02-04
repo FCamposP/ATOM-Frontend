@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
+    inject,
     OnDestroy,
     OnInit,
     Renderer2,
@@ -8,22 +9,25 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { MenuService } from './app.menu.service';
-import { AppSidebarComponent } from './app.sidebar.component';
-import { AppTopbarComponent } from './app.topbar.component';
-import { LayoutService } from './service/app.layout.service';
-
+import { AppSidebarComponent } from './components/sidebar/app.sidebar.component';
+import { AppTopbarComponent } from './components/topbar/app.topbar.component';
+import { LayoutService } from '@core/services/app.layout.service';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './app.layout.component.html'
 })
 export class AppLayoutComponent implements OnInit, OnDestroy {
+
+    private layoutService= inject(LayoutService);
+    private renderer= inject(Renderer2);
+    private router= inject(Router);
+    private cd= inject(ChangeDetectorRef);
+    private route= inject(ActivatedRoute);
+
     overlayMenuOpenSubscription: Subscription;
 
     topbarMenuOpenSubscription: Subscription;
-
-    menuProfileOpenSubscription: Subscription;
 
     menuOutsideClickListener: any;
 
@@ -37,15 +41,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
     @ViewChild(AppTopbarComponent) appTopbar!: AppTopbarComponent;
 
-    constructor(
-        private menuService: MenuService,
-        public layoutService: LayoutService,
-        public renderer: Renderer2,
-        public router: Router,
-        private cd: ChangeDetectorRef,
-        private route: ActivatedRoute,
-    ) {
-
+    constructor() {
 
         this.hideMenuProfile();
 
@@ -134,30 +130,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.menuProfileOpenSubscription =
-            this.layoutService.menuProfileOpen$.subscribe(() => {
-                this.hideMenu();
 
-                if (!this.menuProfileOutsideClickListener) {
-                    this.menuProfileOutsideClickListener = this.renderer.listen(
-                        'document',
-                        'click',
-                        (event) => {
-                            const isOutsideClicked = !(
-                                this.appSidebar.menuProfile.el.nativeElement.isSameNode(
-                                    event.target
-                                ) ||
-                                this.appSidebar.menuProfile.el.nativeElement.contains(
-                                    event.target
-                                )
-                            );
-                            if (isOutsideClicked) {
-                                this.hideMenuProfile();
-                            }
-                        }
-                    );
-                }
-            });
 
         this.router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
@@ -211,7 +184,6 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
         this.layoutService.state.overlayMenuActive = false;
         this.layoutService.state.staticMenuMobileActive = false;
         this.layoutService.state.menuHoverActive = false;
-        this.menuService.reset();
 
         if (this.menuOutsideClickListener) {
             this.menuOutsideClickListener();

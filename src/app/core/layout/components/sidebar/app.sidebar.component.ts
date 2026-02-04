@@ -1,34 +1,32 @@
 import {
-    AfterViewInit,
     Component,
     ElementRef,
+    inject,
     OnDestroy,
     ViewChild,
 } from '@angular/core';
-import { AppMenuProfileComponent } from './app.menuprofile.component';
-import { LayoutService } from './service/app.layout.service';
+import { LayoutService } from 'src/app/core/services/app.layout.service';
+
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './app.sidebar.component.html',
 })
 export class AppSidebarComponent implements OnDestroy {
-    timeout: any = null;
 
-    @ViewChild(AppMenuProfileComponent) menuProfile!: AppMenuProfileComponent;
+    private layoutService = inject(LayoutService);
+    public el = inject(ElementRef);
+
+    timeout: any = null;
 
     @ViewChild('menuContainer') menuContainer!: ElementRef;
 
-    constructor(public layoutService: LayoutService, public el: ElementRef) {}
+    constructor() { }
 
     resetOverlay() {
         if (this.layoutService.state.overlayMenuActive) {
             this.layoutService.state.overlayMenuActive = false;
         }
-    }
-
-    get menuProfilePosition(): string {
-        return this.layoutService.config().menuProfilePosition;
     }
 
     onMouseEnter() {
@@ -52,9 +50,6 @@ export class AppSidebarComponent implements OnDestroy {
         }
     }
 
-    anchor() {
-        this.layoutService.state.anchored = !this.layoutService.state.anchored;
-    }
 
     ngOnDestroy() {
         this.resetOverlay();

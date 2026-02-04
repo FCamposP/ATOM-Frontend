@@ -7,7 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Task } from 'src/app/modules/models/task'
+import { Task } from 'src/app/modules/models/interfaces/task'
+
 @Component({
     selector: 'app-form-task',
     standalone: true,

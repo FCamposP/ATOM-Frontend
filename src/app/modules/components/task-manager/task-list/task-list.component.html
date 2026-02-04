@@ -1,7 +1,8 @@
 <div>
   <ul class="list-none p-0 m-0">
-    <li *ngFor="let task of taskList; trackBy:trackByTaskId" class="flex flex-column md:flex-row md:align-items-center 
-               justify-content-between gap-3 p-3 border-bottom-1 surface-border">
+    @for (task of taskList; track task.id) {
+    <li class="flex flex-column md:flex-row md:align-items-center 
+             justify-content-between gap-3 p-3 border-bottom-1 surface-border">
       <div class="flex align-items-start flex-1 gap-3">
         <p-checkbox [binary]="true" (onChange)="onCheckboxChange($event, task)" [(ngModel)]="task.completed"
           [inputId]="task.id.toString()">
@@ -28,5 +29,6 @@
         </button>
       </div>
     </li>
+    }
   </ul>
 </div>

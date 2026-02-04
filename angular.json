@@ -26,9 +26,6 @@
                         ],
                         "allowedCommonJsDependencies": [
                             "lodash",
-                            "devexpress-diagram",
-                            "devexpress-gantt",
-                            "devextreme-quill",
                             "jszip",
                             "ngIf-compat",
                             "rxjs-compat"
@@ -37,15 +34,9 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            {
-                                "glob": "devextreme-licence.txt",
-                                "input": "src",
-                                "output": "/"
-                              }
+                            "src/assets"                           
                         ],
                         "styles": [
-                            "node_modules/bootstrap/scss/bootstrap.scss",
                             "node_modules/font-awesome/css/font-awesome.css",
                             "node_modules/@y3krulez/angular-archwizard/styles/archwizard.scss",
                             "src/themes/generated/theme.base.css",
@@ -57,7 +48,6 @@
                              "node_modules/intl-tel-input/build/css/intlTelInput.css"
                         ],
                         "scripts": [
-                            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
                         ]
                     },
                     "configurations": {

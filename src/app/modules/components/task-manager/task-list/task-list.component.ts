@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { Task } from 'src/app/modules/models/task';
+import { Task } from 'src/app/modules/models/interfaces/task';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+
 @Component({
     selector: 'app-task-list',
     standalone: true,
@@ -28,10 +29,6 @@ export class TaskListComponent implements OnInit {
 
     ngOnInit(): void {
 
-    }
-
-    trackByTaskId(index: number, task: Task): string {
-        return task.id;
     }
 
     onDeleteTask(taskId: string) {
