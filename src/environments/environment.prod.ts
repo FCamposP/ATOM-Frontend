@@ -1,19 +1,9 @@
 import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
-    production: true,
-    apiUrl: 'https://trazaragro.oirsa.org/Services/api/',
-    apiOdata: 'https://trazaragro.oirsa.org/Services/odata/',
+    apiUrl: 'https://us-central1-atom-task-manager-3bc2e.cloudfunctions.net/api/',
     frontUrl: 'http://localhost:4200',
-    frontPath: '/registration',
-    loginUrl: 'http://localhost:4401',
-    trazarAgroUrl:'https://trazaragro.oirsa.org/',
-    subModule:'financial',
-    // subModule:'crstore',
-    // httOptionsDefault: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Bearer ' + localStorage.getItem('Authorization'),
-    // })
+    loginUrl: 'http://localhost:4200/login',
 };
 
 export const formatString = (template: any, ...args: any[]) => {

@@ -1,16 +1,10 @@
 import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
-    production: true,
-    apiUrl: 'http://localhost:3000/',
+    production: false,
+    apiUrl: 'https://us-central1-atom-task-manager-3bc2e.cloudfunctions.net/api/',
     frontUrl: 'http://localhost:4200',
     loginUrl: 'http://localhost:4200/login',
-
-    // httOptionsDefault: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     'X-Local-Instance:':localStorage.getItem('LocalInstance')??"",
-    //     Authorization: 'Bearer ' + localStorage.getItem('Bearer'),
-    // })
 };
 
 export const formatString = (template: any, ...args: any[]) => {
